@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import UserContext from "./common/UserContext";
+import LoginScreen from "./screens/LoginScreen";
+import SignUpScreen from "./screens/SignUpScreen";
+import GlobalStyle from "./styles/GlobalStyles";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserContext.Provider value={{}}>
+      <GlobalStyle />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LoginScreen />} />
+
+          <Route path="/sign-up" element={<SignUpScreen />} />
+
+          {/* <Route path="/subscriptions" element={<SubscriptionScreen />} />
+          <Route path="/home" element={<HomeScreen />} /> */}
+        </Routes>
+      </BrowserRouter>
+    </UserContext.Provider>
   );
 }
-
-export default App;
