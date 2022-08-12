@@ -26,27 +26,9 @@ export default function SubsScreen() {
         </>
       ) : (
         subs.map((sub) => (
-          <SubCard subId={subs.id} image={sub.image} children={sub.price} />
+          <SubCard subId={sub.id} image={sub.image} children={sub.price} />
         ))
       )}
-      {/* <SubCard
-        onClick={() => alert("funcionando")}
-        image={logoWhite}
-        alt="logo_white"
-        children="R$ 39,99"
-      />
-      <SubCard
-        onClick={() => alert("funcionando")}
-        image={logoYellow}
-        alt="logo_yellow"
-        children="R$ 69,99"
-      />
-      <SubCard
-        onClick={() => alert("funcionando")}
-        image={logoGreen}
-        alt="logo_green"
-        children="R$ 99,99"
-      /> */}
     </>
   );
 }
