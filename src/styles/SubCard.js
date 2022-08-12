@@ -2,12 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-export default function SubCard({ subId, image, children }) {
+export default function SubCard({ subId, image, price }) {
   const navigate = useNavigate();
   return (
     <Wrapper onClick={() => navigate(`/subscriptions/${subId}`)}>
       <img src={image} alt="" />
-      <p>R$ {children}</p>
+      <p>R$ {price}</p>
     </Wrapper>
   );
 }

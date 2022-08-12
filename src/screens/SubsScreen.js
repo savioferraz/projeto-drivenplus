@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import SubCard from "../styles/SubCard";
-// import logoGreen from "../common/images/logo_green.png";
-// import logoWhite from "../common/images/logo_white.png";
-// import logoYellow from "../common/images/logo_yellow.png";
 import { getSubscription } from "../common/Services";
 
 export default function SubsScreen() {
@@ -26,7 +23,7 @@ export default function SubsScreen() {
         </>
       ) : (
         subs.map((sub) => (
-          <SubCard subId={sub.id} image={sub.image} children={sub.price} />
+          <SubCard subId={sub.id} image={sub.image} price={sub.price} />
         ))
       )}
     </>
