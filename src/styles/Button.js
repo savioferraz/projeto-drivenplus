@@ -5,14 +5,14 @@ export default function Button({
   children,
   width = "80%",
   height = "52px",
-  background = "#FF4791",
+  background = "rgba(255, 71, 145, 1)",
   onClick,
 }) {
   return (
     <Wrapper
       height={height}
       width={width}
-      background-color={background}
+      background={background}
       onClick={onClick}
     >
       {children}
@@ -21,7 +21,7 @@ export default function Button({
 }
 
 const Wrapper = styled.button`
-  background-color: ${(props) => props.background};
+  background: ${(props) => props.background};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   border-radius: 8px;

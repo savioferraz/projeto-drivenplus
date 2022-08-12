@@ -1,24 +1,27 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { postLogin } from "../common/Services";
 import { Link, useNavigate } from "react-router-dom";
-import Input from "../common/Input";
+import Input from "../styles/Input";
+import Button from "../styles/Button";
 import Logo from "../common/images/Logo.png";
-import Button from "../common/Button";
+import UserContext from "../common/UserContext";
 
 export default function LoginScreen() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { setMembership } = useContext(UserContext);
   const data = { email, password };
 
   function handleForm(e) {
     e.preventDefault();
-    console.log(data);
-    postLogin(data).then((res) => {
-      const token = res.data.token;
+    postLogin(data).then((answer) => {
+      setMembership(answer.data.membership);
+      console.log(answer.data.membership);
+      const token = answer.data.token;
       const authJSON = JSON.stringify({ token: token });
       localStorage.setItem("drivenplus", authJSON);
-      navigate("/home");
+      navigate("/subscriptions");
     });
   }
 
@@ -30,6 +33,7 @@ export default function LoginScreen() {
           placeholder={"E-mail"}
           type={"email"}
           name={"email"}
+          s
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -40,7 +44,9 @@ export default function LoginScreen() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button type="submit">Entrar</Button>
+        <Button type="submit" background="#FF4791">
+          Entrar
+        </Button>
         <Link to="/sign-up">Não tem uma conta? Cadastre-se</Link>
       </form>
     </>

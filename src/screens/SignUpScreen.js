@@ -1,21 +1,28 @@
 import React, { useState } from "react";
 import { postSignUp } from "../common/Services";
 import { Link, useNavigate } from "react-router-dom";
-import Input from "../common/Input";
-import Button from "../common/Button";
+import Input from "../styles/Input";
+import Button from "../styles/Button";
 
 export default function CreateAccount() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [cpf, setCpf] = useState("");
-  const data = { email, name, cpf, password };
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const data = { name, cpf, email, password };
 
   function handleForm(e) {
     e.preventDefault();
     console.log(data);
-    postSignUp(data).then(() => navigate("/"));
+    postSignUp(data)
+      .then((answer) => {
+        const token = answer.data.token;
+        const authJSON = JSON.stringify({ token: token });
+        localStorage.setItem("drivenplus", authJSON);
+        navigate("/");
+      })
+      .catch((error) => alert(`Opa, algo deu errado... ${error.message}`));
   }
 
   return (
@@ -30,7 +37,8 @@ export default function CreateAccount() {
         />
         <Input
           placeholder={"CPF"}
-          type={"number"}
+          type={"tel"}
+          pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}"
           name={"cpf"}
           value={cpf}
           onChange={(e) => setCpf(e.target.value)}

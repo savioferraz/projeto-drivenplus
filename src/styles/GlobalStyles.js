@@ -60,15 +60,17 @@ table {
 }
 body {
     font-family: Roboto, sans-serif;
-	background-color: #000000;
+	background-color: #0E0E13;
 }
 p {
-	color: #666666;
+	color: #FFFFFF;
 	font-size:18px
 }
 h1 {
-	color: #52B6FF;
-	font-size:17px
+	color: #FFFFFF;
+	font-weight: 700;
+	font-size: 32px;
+	line-height: 38px;
 }
 form{
 	display:flex;
