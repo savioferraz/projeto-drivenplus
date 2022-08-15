@@ -1,11 +1,12 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { UserProvider } from "./common/UserContext";
-import SubsScreen from "./screens/SubsScreen";
-import LoginScreen from "./screens/LoginScreen";
-import SignUpScreen from "./screens/SignUpScreen";
-import HomeScreen from "./screens/HomeScreen";
+import SubsListPage from "./pages/SubsListPage";
+import LoginPage from "./pages/LoginPage";
+import SignUpPage from "./pages/SignUpPage";
+import HomePage from "./pages/HomePage";
 import GlobalStyle from "./styles/GlobalStyles";
+import SubPage from "./pages/SubPage";
 
 export default function App() {
   return (
@@ -13,10 +14,11 @@ export default function App() {
       <GlobalStyle />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LoginScreen />} />
-          <Route path="/sign-up" element={<SignUpScreen />} />
-          <Route path="/subscriptions" element={<SubsScreen />} />
-          <Route path="/home" element={<HomeScreen />} />
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
+          <Route path="/subscriptions/" element={<SubsListPage />} />
+          <Route path="/subscriptions/:subId" element={<SubPage />} />
+          <Route path="/home" element={<HomePage />} />
         </Routes>
       </BrowserRouter>
     </UserProvider>

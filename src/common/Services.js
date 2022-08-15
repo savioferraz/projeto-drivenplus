@@ -30,7 +30,10 @@ function getSubscription() {
 
 function getSubscriptionId(subId) {
   const config = createHeaders();
-  const promise = axios.get(`${url}/subscriptions/${subId}`, config);
+  const promise = axios.get(
+    `${url}/subscriptions/memberships/${subId}`,
+    config
+  );
   return promise;
 }
 

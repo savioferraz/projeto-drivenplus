@@ -6,7 +6,7 @@ import Button from "../styles/Button";
 import Logo from "../common/images/Logo.png";
 import UserContext from "../common/UserContext";
 
-export default function LoginScreen() {
+export default function LoginPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
 import UserContext from "../common/UserContext";
 
-export default function HomeScreen() {
+export default function HomePage() {
   const { membership } = useContext(UserContext);
   console.log(membership);
 

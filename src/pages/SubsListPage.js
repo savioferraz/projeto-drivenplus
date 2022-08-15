@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import SubCard from "../styles/SubCard";
 import { getSubscription } from "../common/Services";
 
-export default function SubsScreen() {
+export default function SubsListPage() {
   const [subs, setSubs] = useState([]);
 
   useEffect(() => {
@@ -12,7 +12,6 @@ export default function SubsScreen() {
       })
       .catch((error) => alert(`Opa, algo deu errado... ${error.message}`));
   }, []);
-  console.log(subs);
 
   return (
     <>

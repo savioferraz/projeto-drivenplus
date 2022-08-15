@@ -16,7 +16,6 @@ export default function Input({ placeholder, type, name, value, onChange }) {
 
 const Wrapper = styled.input`
   height: 45px;
-  width: 80%;
   background: #ffffff;
   border: 1px solid #d5d5d5;
   border-radius: 8px;

@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 export default function SubCard({ subId, image, price }) {
   const navigate = useNavigate();
+
   return (
     <Wrapper onClick={() => navigate(`/subscriptions/${subId}`)}>
       <img src={image} alt="" />

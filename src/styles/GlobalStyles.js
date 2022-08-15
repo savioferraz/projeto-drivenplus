@@ -64,7 +64,7 @@ body {
 }
 p {
 	color: #FFFFFF;
-	font-size:18px
+	font-size:18px;
 }
 h1 {
 	color: #FFFFFF;

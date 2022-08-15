@@ -5,6 +5,7 @@ const UserContext = createContext();
 
 export function UserProvider({ children }) {
   const [membership, setMembership] = useState(null);
+
   return (
     <UserContext.Provider value={{ membership, setMembership }}>
       {children}
