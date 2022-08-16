@@ -8,6 +8,7 @@ export default function Input({
   name,
   value,
   onChange,
+  disabled = false,
   background = "#ffffff",
 }) {
   return (
@@ -19,7 +20,7 @@ export default function Input({
       value={value}
       onChange={onChange}
       background={background}
-      required
+      disabled={disabled}
     ></Wrapper>
   );
 }

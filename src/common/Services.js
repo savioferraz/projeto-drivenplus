@@ -38,7 +38,8 @@ function getSubscriptionId(subId) {
 }
 
 function postSubscription(body) {
-  const promise = axios.post(`${url}/subscriptions`, body);
+  const config = createHeaders();
+  const promise = axios.post(`${url}/subscriptions`, body, config);
   return promise;
 }
 
@@ -53,14 +54,9 @@ function cancelSub() {
   return promise;
 }
 
-function getUser(userId) {
-  const config = createHeaders();
-  const promise = axios.get(`${url}/users/${userId}`, config);
-  return promise;
-}
-
 function putUser(body) {
-  const promise = axios.put(`${url}/users`, body);
+  const config = createHeaders();
+  const promise = axios.put(`${url}/users`, body, config);
   return promise;
 }
 
@@ -73,6 +69,5 @@ export {
   postSubscription,
   postChangeSub,
   cancelSub,
-  getUser,
   putUser,
 };

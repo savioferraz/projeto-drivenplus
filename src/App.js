@@ -9,6 +9,7 @@ import GlobalStyle from "./styles/GlobalStyles";
 import SubPage from "./pages/SubPage";
 import UserPage from "./pages/UserPage";
 import UpdatePage from "./pages/UpdatePage";
+import PrivatePage from "./pages/PrivatePage";
 
 export default function App() {
   return (
@@ -16,7 +17,14 @@ export default function App() {
       <GlobalStyle />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
+          <Route
+            path="/"
+            element={
+              <PrivatePage>
+                <LoginPage />
+              </PrivatePage>
+            }
+          />
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/subscriptions/" element={<SubsListPage />} />
           <Route path="/subscriptions/:subId" element={<SubPage />} />

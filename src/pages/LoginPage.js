@@ -11,15 +11,18 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setMembership } = useContext(UserContext);
+  const { userId, setUserId } = useContext(UserContext);
   const data = { email, password };
 
   function handleForm(e) {
     e.preventDefault();
     postLogin(data)
       .then((answer) => {
-        setMembership(answer.data.membership);
-        console.log(answer.data.membership);
+        const userData = answer.data;
+        const userDataJSON = JSON.stringify({ userData: userData });
+        localStorage.setItem("drivenplususer", userDataJSON);
+        setUserId(answer.data.id);
+        console.log(userId);
         const token = answer.data.token;
         const authJSON = JSON.stringify({ token: token });
         localStorage.setItem("drivenplus", authJSON);

@@ -2,14 +2,19 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import UserContext from "../common/UserContext";
-import Logo from "../common/images/logo_white.png";
 import Button from "../styles/Button";
 import { cancelSub } from "../common/Services";
 
-export default function HomePage({ userId }) {
+export default function HomePage() {
   const navigate = useNavigate();
-  const { membership } = useContext(UserContext);
-  console.log(membership);
+  const { userId, membership } = useContext(UserContext);
+  const userData = JSON.parse(localStorage.getItem("drivenplususer"));
+  const membershipData = JSON.parse(
+    localStorage.getItem("drivenplusmembership")
+  );
+  console.log(userData);
+  console.log(membershipData);
+  console.log(userId);
 
   function unsubscribe() {
     cancelSub()
@@ -20,25 +25,22 @@ export default function HomePage({ userId }) {
       .catch((error) => alert(`Opa, algo deu errado... ${error.message}`));
   }
 
-  // return membership === null ? (
-  //   <p>
-  //     Você não possui nenhuma assinatura ativa. <bl>Redirecionando...</bl>
-  //   </p>
-  // ) : (
-  //   <p>contem assinatura</p>
-  // );
-
-  return (
+  return membership === null ? (
+    () => navigate(`/subscriptions`)
+  ) : (
     <Wrapper>
       <ion-icon
         name="person-circle"
         onClick={() => navigate(`/users/${userId}`)}
       ></ion-icon>
-      <img src={Logo} alt="logo" />
-      <h1>Olá, fulano</h1>
+      <img src={membershipData.membershipData.image} alt="logo" />
+      <h1>Olá, {userData.userData.name}</h1>
       <Perks>
-        <Button width="100%">Perk 1</Button>
-        <Button width="100%">Perk 2</Button>
+        {membershipData.membershipData.perks.map((perk) => (
+          <Button width="100%" key={perk.id}>
+            {perk.title}
+          </Button>
+        ))}
       </Perks>
       <Bottom>
         <Button width="100%" onClick={() => navigate(`/subscriptions`)}>

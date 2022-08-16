@@ -1,39 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { getUser, putUser } from "../common/Services";
+import { putUser } from "../common/Services";
 import Button from "../styles/Button";
 import Input from "../styles/Input";
 
 export default function UpdatePage() {
   const { userId } = useParams();
   const navigate = useNavigate();
-  const [user, setUser] = useState([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const data = { name, email, password };
-
-  useEffect(() => {
-    getUser(userId)
-      .then((answer) => {
-        console.log(answer);
-        setUser(answer.data);
-      })
-      .catch((error) => alert(`Opa, algo deu errado... ${error.message}`));
-  }, []);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const data = { name, email, currentPassword };
+  const userData = JSON.parse(localStorage.getItem("drivenplususer"));
+  const cpf = userData.userData.cpf;
+  console.log(cpf);
 
   function handleForm(e) {
     e.preventDefault();
     console.log(data);
     putUser(data)
-      .then((answer) => {
-        const token = answer.data.token;
-        const authJSON = JSON.stringify({ token: token });
-        localStorage.setItem("drivenplus", authJSON);
+      .then(() => {
         navigate(`/users/${userId}`);
       })
-      .catch((error) => alert(`Opa, algo deu errado... ${error.message}`));
+      .catch((error) => {
+        console.log(error.response);
+        alert(`Opa, algo deu errado... ${error.message}`);
+      });
   }
 
   return (
@@ -51,10 +44,10 @@ export default function UpdatePage() {
         <Input
           width="100%"
           background="#EBEBEB"
-          placeholder={"CPF"}
-          type={"tel"}
-          pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}"
+          placeholder={cpf}
           name={"cpf"}
+          value={cpf}
+          disabled
         />
         <Input
           width="100%"
@@ -68,15 +61,15 @@ export default function UpdatePage() {
           width="100%"
           placeholder={"Senha atual"}
           type={"password"}
-          name={"oldPassword"}
+          name={"currentPassword"}
+          value={currentPassword}
+          onChange={(e) => setCurrentPassword(e.target.value)}
         />
         <Input
           width="100%"
           placeholder={"Nova senha"}
           type={"password"}
           name={"password"}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
         />
         <Button type="submit" width="100%">
           SALVAR

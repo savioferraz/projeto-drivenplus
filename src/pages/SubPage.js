@@ -28,6 +28,11 @@ export default function SubPage() {
     expirationDate,
   };
 
+  function openDialogBox(e) {
+    e.preventDefault();
+    setDialogBox(true);
+  }
+
   useEffect(() => {
     getSubscriptionId(subId)
       .then((answer) => {
@@ -41,12 +46,17 @@ export default function SubPage() {
     console.log(data);
     postSubscription(data)
       .then((answer) => {
-        const token = answer.data.token;
-        const authJSON = JSON.stringify({ token: token });
-        localStorage.setItem("drivenplus", authJSON);
+        const membershipData = answer.data.membership;
+        const membershipDataJSON = JSON.stringify({
+          membershipData: membershipData,
+        });
+        localStorage.setItem("drivenplusmembership", membershipDataJSON);
         navigate("/home");
       })
-      .catch((error) => alert(`Opa, algo deu errado... ${error.message}`));
+      .catch((error) => {
+        console.log(error.response);
+        alert(`Opa, algo deu errado... ${error.message}`);
+      });
   }
 
   return (
@@ -90,7 +100,7 @@ export default function SubPage() {
         </div>
         <p>R$ {sub.price} cobrados mensalmente</p>
       </Info>
-      <Form onSubmit={() => setDialogBox(true)}>
+      <Form onSubmit={openDialogBox}>
         <Input
           width="100%"
           placeholder={"Nome impresso no cartão"}
@@ -129,9 +139,6 @@ export default function SubPage() {
           ASSINAR
         </Button>
       </Form>
-      <Button type="submit" width="100%" onClick={() => setDialogBox(true)}>
-        MOSTRAR MODAL
-      </Button>
     </Wrapper>
   );
 }
