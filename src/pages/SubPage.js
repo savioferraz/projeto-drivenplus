@@ -79,7 +79,7 @@ export default function SubPage() {
             <>Carregando benefícios...</>
           ) : (
             sub.perks.map((perk, index) => (
-              <li>
+              <li key={perk.id}>
                 {index + 1}. {perk.title}
               </li>
             ))

@@ -7,6 +7,8 @@ import SignUpPage from "./pages/SignUpPage";
 import HomePage from "./pages/HomePage";
 import GlobalStyle from "./styles/GlobalStyles";
 import SubPage from "./pages/SubPage";
+import UserPage from "./pages/UserPage";
+import UpdatePage from "./pages/UpdatePage";
 
 export default function App() {
   return (
@@ -19,6 +21,8 @@ export default function App() {
           <Route path="/subscriptions/" element={<SubsListPage />} />
           <Route path="/subscriptions/:subId" element={<SubPage />} />
           <Route path="/home" element={<HomePage />} />
+          <Route path="/users/:userId" element={<UserPage />} />
+          <Route path="/users/:userId/update" element={<UpdatePage />} />
         </Routes>
       </BrowserRouter>
     </UserProvider>

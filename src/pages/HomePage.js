@@ -6,14 +6,17 @@ import Logo from "../common/images/logo_white.png";
 import Button from "../styles/Button";
 import { cancelSub } from "../common/Services";
 
-export default function HomePage() {
+export default function HomePage({ userId }) {
   const navigate = useNavigate();
   const { membership } = useContext(UserContext);
   console.log(membership);
 
   function unsubscribe() {
     cancelSub()
-      .then(() => navigate(`/subscriptions`))
+      .then(() => {
+        alert("Assinatura cancelada com sucesso");
+        navigate(`/subscriptions`);
+      })
       .catch((error) => alert(`Opa, algo deu errado... ${error.message}`));
   }
 
@@ -27,7 +30,10 @@ export default function HomePage() {
 
   return (
     <Wrapper>
-      <ion-icon name="person-circle"></ion-icon>
+      <ion-icon
+        name="person-circle"
+        onClick={() => navigate(`/users/${userId}`)}
+      ></ion-icon>
       <img src={Logo} alt="logo" />
       <h1>Olá, fulano</h1>
       <Perks>

@@ -22,7 +22,12 @@ export default function SubsListPage() {
         </>
       ) : (
         subs.map((sub) => (
-          <SubCard subId={sub.id} image={sub.image} price={sub.price} />
+          <SubCard
+            key={sub.id}
+            subId={sub.id}
+            image={sub.image}
+            price={sub.price}
+          />
         ))
       )}
     </>

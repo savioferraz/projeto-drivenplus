@@ -53,6 +53,17 @@ function cancelSub() {
   return promise;
 }
 
+function getUser(userId) {
+  const config = createHeaders();
+  const promise = axios.get(`${url}/users/${userId}`, config);
+  return promise;
+}
+
+function putUser(body) {
+  const promise = axios.put(`${url}/users`, body);
+  return promise;
+}
+
 export {
   createHeaders,
   postSignUp,
@@ -62,4 +73,6 @@ export {
   postSubscription,
   postChangeSub,
   cancelSub,
+  getUser,
+  putUser,
 };

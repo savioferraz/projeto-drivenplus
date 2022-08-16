@@ -8,6 +8,7 @@ export default function Input({
   name,
   value,
   onChange,
+  background = "#ffffff",
 }) {
   return (
     <Wrapper
@@ -17,6 +18,7 @@ export default function Input({
       name={name}
       value={value}
       onChange={onChange}
+      background={background}
       required
     ></Wrapper>
   );
@@ -24,8 +26,8 @@ export default function Input({
 
 const Wrapper = styled.input`
   width: ${(props) => props.width};
+  background: ${(props) => props.background};
   height: 45px;
-  background: #ffffff;
   border: 1px solid #d5d5d5;
   border-radius: 8px;
   margin: 6px auto;
