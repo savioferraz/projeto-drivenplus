@@ -24,8 +24,8 @@ export default function ConfirmModal({ name, price, confirm, cancel }) {
 
 const Wrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
-  width: 100vw;
-  height: 100vh;
+  width: 80vw;
+  height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;

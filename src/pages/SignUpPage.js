@@ -3,6 +3,7 @@ import { postSignUp } from "../common/Services";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../styles/Input";
 import Button from "../styles/Button";
+import styled from "styled-components";
 
 export default function CreateAccount() {
   const navigate = useNavigate();
@@ -26,9 +27,10 @@ export default function CreateAccount() {
   }
 
   return (
-    <>
+    <Wrapper>
       <form onSubmit={handleForm}>
         <Input
+          width="100%"
           placeholder={"Nome"}
           type={"text"}
           name={"name"}
@@ -36,6 +38,7 @@ export default function CreateAccount() {
           onChange={(e) => setName(e.target.value)}
         />
         <Input
+          width="100%"
           placeholder={"CPF"}
           type={"tel"}
           pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}"
@@ -44,6 +47,7 @@ export default function CreateAccount() {
           onChange={(e) => setCpf(e.target.value)}
         />
         <Input
+          width="100%"
           placeholder={"E-mail"}
           type={"email"}
           name={"email"}
@@ -51,15 +55,25 @@ export default function CreateAccount() {
           onChange={(e) => setEmail(e.target.value)}
         />
         <Input
+          width="100%"
           placeholder={"Senha"}
           type={"password"}
           name={"password"}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button type="submit">Cadastrar</Button>
+        <Button type="submit" width="100%">
+          Cadastrar
+        </Button>
       </form>
       <Link to="/">Já possui uma conta? Entre</Link>
-    </>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  padding-top: 20vh;
+  button {
+    margin: 16px auto 24px auto;
+  }
+`;

@@ -1,9 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function Input({ placeholder, type, name, value, onChange }) {
+export default function Input({
+  width,
+  placeholder,
+  type,
+  name,
+  value,
+  onChange,
+}) {
   return (
     <Wrapper
+      width={width}
       placeholder={placeholder}
       type={type}
       name={name}
@@ -15,9 +23,10 @@ export default function Input({ placeholder, type, name, value, onChange }) {
 }
 
 const Wrapper = styled.input`
+  width: ${(props) => props.width};
   height: 45px;
   background: #ffffff;
   border: 1px solid #d5d5d5;
   border-radius: 8px;
-  margin: 3px auto;
+  margin: 6px auto;
 `;

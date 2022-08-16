@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { getSubscriptionId, postSubscription } from "../common/Services";
+import UserContext from "../common/UserContext";
 import Button from "../styles/Button";
 import ConfirmModal from "../styles/ConfirmModal";
 import Input from "../styles/Input";
@@ -9,19 +10,21 @@ import Input from "../styles/Input";
 export default function SubPage() {
   const navigate = useNavigate();
   const { subId } = useParams();
+  const { membership, setMembership } = useContext(UserContext);
   const [sub, setSub] = useState([]);
   const [cardName, setCardName] = useState("");
   const [cardNumber, setCardNumber] = useState("");
-  const [securityNumber, setSecurityNumber] = useState("");
+  const [securityNum, setSecurityNum] = useState("");
   const [expirationDate, setExpirationDate] = useState("");
   const [dialogBox, setDialogBox] = useState(false);
-  const membershipId = parseInt(subId);
-  const securityNum = parseInt(securityNumber);
+  setMembership(parseInt(subId));
+  const membershipId = membership;
+  const securityNumber = parseInt(securityNum);
   const data = {
     membershipId,
     cardName,
     cardNumber,
-    securityNum,
+    securityNumber,
     expirationDate,
   };
 
@@ -36,14 +39,14 @@ export default function SubPage() {
   function handleForm(e) {
     e.preventDefault();
     console.log(data);
-    // postSubscription(data)
-    //   .then((answer) => {
-    //     const token = answer.data.token;
-    //     const authJSON = JSON.stringify({ token: token });
-    //     localStorage.setItem("drivenplus", authJSON);
-    //     navigate("/");
-    //   })
-    //   .catch((error) => alert(`Opa, algo deu errado... ${error.message}`));
+    postSubscription(data)
+      .then((answer) => {
+        const token = answer.data.token;
+        const authJSON = JSON.stringify({ token: token });
+        localStorage.setItem("drivenplus", authJSON);
+        navigate("/home");
+      })
+      .catch((error) => alert(`Opa, algo deu errado... ${error.message}`));
   }
 
   return (
@@ -63,7 +66,7 @@ export default function SubPage() {
         onClick={() => navigate(`/subscriptions`)}
       ></ion-icon>
       <div>
-        <img src={sub.image} />
+        <img src={sub.image} alt="subscription_logo" />
         <h1>{sub.name}</h1>
       </div>
 
@@ -87,8 +90,9 @@ export default function SubPage() {
         </div>
         <p>R$ {sub.price} cobrados mensalmente</p>
       </Info>
-      <CardForm onSubmit={() => setDialogBox(true)}>
+      <Form onSubmit={() => setDialogBox(true)}>
         <Input
+          width="100%"
           placeholder={"Nome impresso no cartão"}
           type={"text"}
           name={"cardName"}
@@ -96,6 +100,7 @@ export default function SubPage() {
           onChange={(e) => setCardName(e.target.value)}
         />
         <Input
+          width="100%"
           placeholder={"Digitos do cartão"}
           type={"text"}
           name={"cardNumber"}
@@ -104,13 +109,15 @@ export default function SubPage() {
         />
         <div>
           <Input
+            width="39vw"
             placeholder={"Código de segurança"}
             type={"number"}
-            name={"securityNumber"}
-            value={securityNumber}
-            onChange={(e) => setSecurityNumber(e.target.value)}
+            name={"securityNum"}
+            value={securityNum}
+            onChange={(e) => setSecurityNum(e.target.value)}
           />
           <Input
+            width="39vw"
             placeholder={"Validade"}
             type={"text"}
             name={"expirationDate"}
@@ -118,19 +125,18 @@ export default function SubPage() {
             onChange={(e) => setExpirationDate(e.target.value)}
           />
         </div>
-        <Button type="submit">ASSINAR</Button>
-      </CardForm>
-      <Button type="submit" onClick={() => setDialogBox(true)}>
-        ASSINAR
+        <Button type="submit" width="100%">
+          ASSINAR
+        </Button>
+      </Form>
+      <Button type="submit" width="100%" onClick={() => setDialogBox(true)}>
+        MOSTRAR MODAL
       </Button>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
   h1 {
     margin: 12px auto;
   }
@@ -149,8 +155,9 @@ const Wrapper = styled.div`
 `;
 
 const Info = styled.div`
-  width: 85vw;
-  margin-bottom: 34px;
+  margin-bottom: 22px;
+  text-align: left;
+
   ul {
     margin: 9px auto;
     padding-left: 10px;
@@ -180,12 +187,13 @@ const Info = styled.div`
   }
 `;
 
-const CardForm = styled.form`
-  width: 80vw;
+const Form = styled.form`
+  button {
+    margin: 12px auto;
+  }
   div {
-    width: 80vw;
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    margin: auto 4px;
   }
 `;

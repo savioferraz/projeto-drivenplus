@@ -23,8 +23,9 @@ const Wrapper = styled.div`
   border: 3px solid #7e7e7e;
   border-radius: 12px;
   background: #0e0e13;
-  margin: 5px auto;
+  margin: 10px auto;
   padding: 16px;
+  text-align: center;
   img {
     height: 95px;
     width: 139px;

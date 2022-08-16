@@ -61,6 +61,11 @@ table {
 body {
     font-family: Roboto, sans-serif;
 	background-color: #0E0E13;
+	max-width: 100vw;
+	height: 100vh;
+	padding: 8vh 10vw;
+	position: relative;
+	text-align: center;
 }
 p {
 	color: #FFFFFF;

@@ -5,6 +5,7 @@ import Input from "../styles/Input";
 import Button from "../styles/Button";
 import Logo from "../common/images/Logo.png";
 import UserContext from "../common/UserContext";
+import styled from "styled-components";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -15,40 +16,54 @@ export default function LoginPage() {
 
   function handleForm(e) {
     e.preventDefault();
-    postLogin(data).then((answer) => {
-      setMembership(answer.data.membership);
-      console.log(answer.data.membership);
-      const token = answer.data.token;
-      const authJSON = JSON.stringify({ token: token });
-      localStorage.setItem("drivenplus", authJSON);
-      navigate("/subscriptions");
-    });
+    postLogin(data)
+      .then((answer) => {
+        setMembership(answer.data.membership);
+        console.log(answer.data.membership);
+        const token = answer.data.token;
+        const authJSON = JSON.stringify({ token: token });
+        localStorage.setItem("drivenplus", authJSON);
+        navigate("/subscriptions");
+      })
+      .catch((error) => alert(`Opa, algo deu errado... ${error.message}`));
   }
 
   return (
-    <>
-      <img src={Logo} alt="logo" />
+    <Wrapper>
+      <img src={Logo} alt="logo" width="300px" height="50px" />
       <form onSubmit={handleForm}>
         <Input
+          width="100%"
           placeholder={"E-mail"}
           type={"email"}
           name={"email"}
-          s
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <Input
+          width="100%"
           placeholder={"Senha"}
           type={"password"}
           name={"password"}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button type="submit" background="#FF4791">
+        <Button width="100%" type="submit" background="#FF4791">
           Entrar
         </Button>
         <Link to="/sign-up">Não tem uma conta? Cadastre-se</Link>
       </form>
-    </>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  button {
+    margin: 16px auto 24px auto;
+  }
+  img {
+    display: flex;
+    align-items: center;
+    margin: 100px auto;
+  }
+`;
