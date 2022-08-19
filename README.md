@@ -1,7 +1,7 @@
 # DrivenPlus
 
 This simple app let you create an account and subscribe to an online service, the DrivenPlus
-<img src="https://im5.ezgif.com/tmp/ezgif-5-19c5bf0db3.gif" alt="demo_gif"/>
+<img src="https://lh3.googleusercontent.com/pw/AL9nZEWZOTcKxNLncid42b3Dda2rIPlaeoGYmWjqgjqNPu5QaYxOQrhjcp_qgJkA_HzlpE2LSRYTd8ETjxurl3jda6jGVY8NfI_A_kUl-qwjWVUdQo16Oh7luWQi7x5zUFLnFRbybpwXxcygyZRjGNXsK_9E=w279-h499-no?authuser=0" alt="demo_gif"/>
 <br>Try it now at https://projeto-drivenplus-inky.vercel.app/
 
 ## About
