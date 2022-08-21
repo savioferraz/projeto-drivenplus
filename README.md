@@ -6,7 +6,8 @@ This simple app let you create an account and subscribe to an online service, th
 
 ## About
 
-This is a web application that simulates some kind of monthly subscription service, wich consist of the following features:
+This is a single page application that simulates some kind of monthly subscription service. The app request and send data from an API and render on user screen.  
+Consist of the following features:
 
 - Sign up
 - Login
